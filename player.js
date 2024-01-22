@@ -11,25 +11,37 @@ const rl = readline.createInterface({
 })
 
 while (true) {
+  console.log()
   cube.print()
+  console.log()
   const ans = await rl.question('Enter command: ')
   try {
-    switch (ans.split(' ')[0]) {
-      case 'exit':
-        process.exit()
-      case 'rotate':
-      case 'r':
-        handleRotate(ans.split(' ')[1])
-        break
-      case 'spin':
-      case 's':
-        console.log('spin')
-        break
-      default:
-        console.log('Invalid command')
-    }
-  } catch {
+    handleCommand(ans)
+  } catch (e) {
+    console.error(e)
     console.log('Invalid command')
+  }
+}
+
+function handleCommand(cmd) {
+  switch (cmd.split(' ')[0]) {
+    case 'exit':
+    case 'e':
+      console.log()
+      process.exit()
+    case 'rotate':
+    case 'r':
+      handleRotate(cmd.split(' ')[1])
+      break
+    case 'spin':
+    case 's':
+      handleSpin(cmd.split(' ')[1], cmd.split(' ')[2])
+      break
+    case 'shuffle':
+      cube.shuffle()
+      break
+    default:
+      console.log('Invalid command')
   }
 }
 
@@ -37,19 +49,42 @@ function handleRotate(dir) {
   switch (dir) {
     case 'left':
     case 'l':
-      cube.rotateViewLeft()
+      cube.rotateLeft()
       break
     case 'right':
     case 'r':
-      cube.rotateViewRight()
+      cube.rotateRight()
       break
     case 'up':
     case 'u':
-      cube.rotateViewUp()
+      cube.rotateUp()
       break
     case 'down':
     case 'd':
-      cube.rotateViewDown()
+      cube.rotateDown()
+      break
+    default:
+      console.log('Invalid rotate direction')
+  }
+}
+
+function handleSpin(dir, index) {
+  switch (dir) {
+    case 'left':
+    case 'l':
+      cube.spinLeft(index)
+      break
+    case 'right':
+    case 'r':
+      cube.spinRight(index)
+      break
+    case 'up':
+    case 'u':
+      cube.spinUp(index)
+      break
+    case 'down':
+    case 'd':
+      cube.spinDown(index)
       break
     default:
       console.log('Invalid rotate direction')

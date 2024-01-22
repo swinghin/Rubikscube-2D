@@ -1,4 +1,4 @@
-import Cell from "./cell.js"
+import Cell from './cell.js'
 
 export default class Face {
   constructor() {
@@ -28,7 +28,7 @@ export default class Face {
     }
   }
 
-  getColour(row, col) {
+  colour(row, col) {
     let colourCode = ''
     let cell = this.grid[row][col]
     switch (cell.colour) {
@@ -54,7 +54,7 @@ export default class Face {
     return `\x1b[${colourCode}m■\x1b[0m`
   }
 
-  getColourNum(row, col) {
+  cell(row, col) {
     let colourCode = ''
     let cell = this.grid[row][col]
     switch (cell.colour) {
@@ -88,14 +88,20 @@ export default class Face {
     return this.grid[num]
   }
 
-  setRow(row, colours) {
-    this.grid[row][0] = colours[0]
-    this.grid[row][1] = colours[1]
-    this.grid[row][2] = colours[2]
+  setRow(row, cells) {
+    this.grid[row][0] = cells[0]
+    this.grid[row][1] = cells[1]
+    this.grid[row][2] = cells[2]
   }
 
   getCol(num) {
     return this.grid.map((row) => row[num])
+  }
+
+  setCol(col, cells) {
+    this.grid[0][col] = cells[0]
+    this.grid[1][col] = cells[1]
+    this.grid[2][col] = cells[2]
   }
 
   rotateCw() {
