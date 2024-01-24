@@ -18,16 +18,6 @@ export default class Face {
     }
   }
 
-  randomFace() {
-    let colours = ['r', 'g', 'b', 'o', 'w', 'y']
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < 3; j++) {
-        let randomNum = Math.floor(Math.random() * 6)
-        this.grid[i][j] = colours[randomNum]
-      }
-    }
-  }
-
   colour(row, col) {
     let colourCode = ''
     let cell = this.grid[row][col]
